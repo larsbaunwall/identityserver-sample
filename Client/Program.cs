@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using RabbitMQ.Client;
 
 namespace Client
 {
@@ -23,7 +24,7 @@ namespace Client
 
                 ClientId = "platformApiClient",
                 ClientSecret = "SuperSecretPassword",
-                Scope = "rabbitmq.read:*/*"
+                Scope = "quasar.read:*/*"
             });
 
             if (tokenResponse.IsError)
@@ -32,6 +33,12 @@ namespace Client
                 return;
             }
 
+            var factory = new ConnectionFactory {Password = tokenResponse.AccessToken};
+// "guest"/"guest" by default, limited to localhost connections
+
+            var conn = factory.CreateConnection();
+            
+            
             Console.WriteLine(tokenResponse.Json);
             Console.Read();
         }

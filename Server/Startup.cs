@@ -27,21 +27,21 @@ namespace IdentityServer_Example
                         ClientName = "Example client application",
                         AllowedGrantTypes = GrantTypes.ClientCredentials,
                         ClientSecrets = new List<Secret> {new Secret("SuperSecretPassword".Sha256())}, // change me!
-                        AllowedScopes = new List<string> {"rabbitmq.read:*/*"}
+                        AllowedScopes = new List<string> {"quasar.read:*/*"}
                     }
                 })
                 .AddInMemoryApiResources(new List<ApiResource>
                 {
                     new ApiResource
                     {
-                        Name = "rabbitmq",
+                        Name = "quasar",
                         DisplayName = "Quasar messaging",
-                        Scopes = new List<string> {"rabbitmq.read:*/*", "api1.write"},
+                        Scopes = new List<string> {"quasar.read:*/*", "api1.write"},
                     }
                 })
                 .AddInMemoryApiScopes(new List<ApiScope>()
                 {
-                    new ApiScope("rabbitmq.read:*/*", "Read access to RabbitMQ"),
+                    new ApiScope("quasar.read:*/*", "Read access to RabbitMQ"),
                 })
                 .AddDeveloperSigningCredential();
         }
